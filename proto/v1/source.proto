@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package proto.v1;
+
+service SourceService {
+  rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
+  rpc GetSupportedPatterns(GetSupportedPatternsRequest) returns (GetSupportedPatternsResponse);
+}
+
+message GetSourceRequest {
+  string url = 1;
+}
+message GetSourceResponse {
+  string title = 1;
+  string content = 2;
+  string next_url = 3;
+}
+
+message GetSupportedPatternsRequest {
+  string url = 1;
+}
+message GetSupportedPatternsResponse {
+  repeated string patterns = 1;
+}

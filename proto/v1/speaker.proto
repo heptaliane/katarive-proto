@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto.v1;
+
+service SpeakerService {
+  rpc GetMetadata(GetMetadataRequest) returns (GetMetadataResponse);
+  rpc Synthesize(SynthesizeRequest) returns (SynthesizeResponse);
+}
+
+message GetMetadataRequest {}
+message GetMetadataResponse {
+  string name = 1;
+  string version = 2;
+  repeated SpeakerOption options = 3;
+}
+message SpeakerOption {
+  string id = 1;
+  string label = 2;
+  string description = 3;
+}
+
+message SynthesizeRequest {
+  repeated string lines = 1;
+  map<string, string> options = 2;
+}
+message SynthesizeResponse {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_SUCCESS = 1;
+    STATUS_FAILED = 2;
+  }
+
+  Status status = 1;
+  string path = 2;
+}
