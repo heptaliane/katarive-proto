@@ -16,9 +16,7 @@ message GetSourceResponse {
   string next_url = 3;
 }
 
-message GetSupportedPatternsRequest {
-  string url = 1;
-}
+message GetSupportedPatternsRequest {}
 message GetSupportedPatternsResponse {
   repeated string patterns = 1;
 }
