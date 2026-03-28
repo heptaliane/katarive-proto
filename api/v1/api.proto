@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.v1;
+
+service KatariveService {
+  rpc CreateNarration(CreateNarrationRequest) returns (CreateNarrationResponse);
+  rpc GetJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
+}
+
+message CreateNarrationRequest {
+  string url = 1;
+}
+message CreateNarrationResponse {
+  string id = 1;
+}
+
+message GetJobStatusRequest {
+  string id = 1;
+}
+message GetJobStatusResponse {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_PROGRESSING = 1;
+    STATUS_COMPLETED = 2;
+    STATUS_FAILED = 3;
+    STATUS_NOT_FOUND = 4;
+  }
+
+  Status status = 1;
+}
