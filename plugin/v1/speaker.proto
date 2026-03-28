@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package proto.v1;
+package plugin.v1;
 
 service SpeakerService {
   rpc GetMetadata(GetMetadataRequest) returns (GetMetadataResponse);
