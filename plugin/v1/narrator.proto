@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package plugin.v1;
 
-service SpeakerService {
+service NarratorService {
   rpc GetMetadata(GetMetadataRequest) returns (GetMetadataResponse);
   rpc Synthesize(SynthesizeRequest) returns (SynthesizeResponse);
 }
@@ -11,9 +11,9 @@ message GetMetadataRequest {}
 message GetMetadataResponse {
   string name = 1;
   string version = 2;
-  repeated SpeakerOption options = 3;
+  repeated NarratorOption options = 3;
 }
-message SpeakerOption {
+message NarratorOption {
   string id = 1;
   string label = 2;
   string description = 3;
