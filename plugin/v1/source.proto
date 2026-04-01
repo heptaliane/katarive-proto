@@ -4,7 +4,7 @@ package plugin.v1;
 
 service SourceService {
   rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
-  rpc GetSupportedPatterns(GetSupportedPatternsRequest) returns (GetSupportedPatternsResponse);
+  rpc GetSourceServiceMetadata(GetSourceServiceMetadataRequest) returns (GetSourceServiceMetadataResponse);
 }
 
 message GetSourceRequest {
@@ -16,7 +16,9 @@ message GetSourceResponse {
   string next_url = 3;
 }
 
-message GetSupportedPatternsRequest {}
-message GetSupportedPatternsResponse {
-  repeated string patterns = 1;
+message GetSourceServiceMetadataRequest {}
+message GetSourceServiceMetadataResponse {
+  string name = 1;
+  string version = 2;
+  string supported_pattern = 3;
 }

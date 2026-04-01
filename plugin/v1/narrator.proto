@@ -3,20 +3,8 @@ syntax = "proto3";
 package plugin.v1;
 
 service NarratorService {
-  rpc GetMetadata(GetMetadataRequest) returns (GetMetadataResponse);
   rpc Narrate(NarrateRequest) returns (NarrateResponse);
-}
-
-message GetMetadataRequest {}
-message GetMetadataResponse {
-  string name = 1;
-  string version = 2;
-  repeated NarratorOption options = 3;
-}
-message NarratorOption {
-  string id = 1;
-  string label = 2;
-  string description = 3;
+  rpc GetNarratorServiceMetadata(GetNarratorServiceMetadataRequest) returns (GetNarratorServiceMetadataResponse);
 }
 
 message NarrateRequest {
@@ -33,4 +21,16 @@ message NarrateResponse {
   }
 
   Status status = 1;
+}
+
+message GetNarratorServiceMetadataRequest {}
+message GetNarratorServiceMetadataResponse {
+  string name = 1;
+  string version = 2;
+  repeated NarratorOption options = 3;
+}
+message NarratorOption {
+  string id = 1;
+  string label = 2;
+  string description = 3;
 }
