@@ -21,12 +21,12 @@ message NarratorOption {
 }
 
 message NarrateRequest {
-  repeated string lines = 1;
-  map<string, string> options = 2;
+  string path = 1;
+  repeated string lines = 2;
+  map<string, string> options = 3;
 }
 message NarrateResponse {
   string job_id = 1;
-  string path = 2;
 }
 
 message JobStatusRequest {
