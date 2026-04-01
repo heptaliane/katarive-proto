@@ -13,14 +13,8 @@ message NarrateRequest {
   map<string, string> options = 3;
 }
 message NarrateResponse {
-  enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_PROGRESSING = 1;
-    STATUS_SUCCESS = 2;
-    STATUS_FAILED = 3;
-  }
-
-  Status status = 1;
+  bool error = 1;
+  optional string reason = 2;
 }
 
 message GetNarratorServiceMetadataRequest {}
