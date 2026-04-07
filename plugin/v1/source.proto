@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package plugin.v1;
 
+import "plugin/v1/common.proto";
+
 service SourceService {
   rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
   rpc GetSourceServiceMetadata(GetSourceServiceMetadataRequest) returns (GetSourceServiceMetadataResponse);
@@ -13,7 +15,8 @@ message GetSourceRequest {
 message GetSourceResponse {
   string title = 1;
   string content = 2;
-  string next_url = 3;
+  Language language = 3;
+  string next_url = 4;
 }
 
 message GetSourceServiceMetadataRequest {}
