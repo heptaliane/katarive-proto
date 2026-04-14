@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package api.v1;
 
-import "plugin/v1/source.proto";
-
 service KatariveService {
   rpc CreateNarration(CreateNarrationRequest) returns (CreateNarrationResponse);
   rpc GetJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
@@ -30,5 +28,4 @@ message GetJobStatusResponse {
 
   Status status = 1;
   optional string path = 2;
-  optional plugin.v1.GetSourceResponse source = 3;
 }
