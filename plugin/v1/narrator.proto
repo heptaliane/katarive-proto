@@ -13,7 +13,8 @@ message NarrateRequest {
   string path = 1;
   string text = 2;
   Language language = 3;
-  map<string, string> options = 4;
+  AudioEncoding encoding = 4;
+  map<string, string> options = 5;
 }
 message NarrateResponse {
   bool error = 1;
@@ -24,10 +25,17 @@ message GetNarratorServiceMetadataRequest {}
 message GetNarratorServiceMetadataResponse {
   string name = 1;
   string version = 2;
-  repeated NarratorOption options = 3;
+  repeated AudioEncoding supported_encoding = 3;
+  repeated NarratorOption options = 4;
 }
 message NarratorOption {
   string id = 1;
   string label = 2;
   string description = 3;
+}
+enum AudioEncoding {
+  AUDIO_ENCODING_UNSPECIFIED = 0;
+  AUDIO_ENCODING_WAV = 1;
+  AUDIO_ENCODING_MP3 = 2;
+  AUDIO_ENCODING_M4A = 3;
 }
