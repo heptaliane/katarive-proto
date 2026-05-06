@@ -26,12 +26,17 @@ message GetNarratorServiceMetadataResponse {
   string name = 1;
   string version = 2;
   repeated AudioEncoding supported_encoding = 3;
-  repeated NarratorOption options = 4;
+  repeated SpeakerInfo speakers = 4;
+  repeated NarratorOption options = 5;
 }
 message NarratorOption {
   string id = 1;
   string label = 2;
   string description = 3;
+}
+message SpeakerInfo {
+  int32 id = 1;
+  string name = 2;
 }
 enum AudioEncoding {
   AUDIO_ENCODING_UNSPECIFIED = 0;
