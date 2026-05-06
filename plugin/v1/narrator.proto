@@ -14,7 +14,8 @@ message NarrateRequest {
   string text = 2;
   Language language = 3;
   AudioEncoding encoding = 4;
-  map<string, string> options = 5;
+  int32 speaker_id = 5;
+  map<string, string> options = 6;
 }
 message NarrateResponse {
   bool error = 1;
