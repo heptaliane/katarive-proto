@@ -5,10 +5,13 @@ package api.v1;
 service KatariveService {
   rpc CreateNarration(CreateNarrationRequest) returns (CreateNarrationResponse);
   rpc GetJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
+  rpc GetSpeakers(GetSpeakersRequest) returns (GetSpeakersResponse);
 }
 
 message CreateNarrationRequest {
   string url = 1;
+  string narrator = 2;
+  int32 speaker_id = 3;
 }
 message CreateNarrationResponse {
   string id = 1;
@@ -28,4 +31,11 @@ message GetJobStatusResponse {
 
   Status status = 1;
   optional string path = 2;
+}
+
+message GetSpeakersRequest {}
+message GetSpeakersResponse {
+  string narrator = 1;
+  int32 speaker_id = 2;
+  string speaker_label = 3;
 }
