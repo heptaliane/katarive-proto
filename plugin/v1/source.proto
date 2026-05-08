@@ -7,6 +7,7 @@ import "plugin/v1/common.proto";
 service SourceService {
   rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
   rpc GetSourceServiceMetadata(GetSourceServiceMetadataRequest) returns (GetSourceServiceMetadataResponse);
+  rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
 }
 
 message GetSourceRequest {
@@ -16,7 +17,6 @@ message GetSourceResponse {
   string title = 1;
   string content = 2;
   Language language = 3;
-  string next_url = 4;
 }
 
 message GetSourceServiceMetadataRequest {}
@@ -24,4 +24,17 @@ message GetSourceServiceMetadataResponse {
   string name = 1;
   string version = 2;
   string supported_pattern = 3;
+}
+
+message ListSourcesRequest {
+  string url = 1;
+}
+message ListSourcesResponse {
+  string name = 1;
+  repeated SourceInfo sources = 2;
+}
+message SourceInfo {
+  int32 id = 1;
+  string title = 2;
+  string url = 3;
 }
