@@ -5,18 +5,9 @@ package plugin.v1;
 import "plugin/v1/common.proto";
 
 service SourceService {
-  rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
   rpc GetSourceServiceMetadata(GetSourceServiceMetadataRequest) returns (GetSourceServiceMetadataResponse);
-  rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
-}
-
-message GetSourceRequest {
-  string url = 1;
-}
-message GetSourceResponse {
-  string title = 1;
-  string content = 2;
-  Language language = 3;
+  rpc GetSourceItem(GetSourceItemRequest) returns (GetSourceItemResponse);
+  rpc GetSourceCollection(GetSourceCollectionRequest) returns (GetSourceCollectionResponse);
 }
 
 message GetSourceServiceMetadataRequest {}
@@ -26,15 +17,40 @@ message GetSourceServiceMetadataResponse {
   string supported_pattern = 3;
 }
 
-message ListSourcesRequest {
+message GetSourceItemRequest {
   string url = 1;
 }
-message ListSourcesResponse {
-  string name = 1;
-  repeated SourceInfo sources = 2;
+message GetSourceItemResponse {
+  SourceItem item = 1;
 }
-message SourceInfo {
-  int32 id = 1;
-  string title = 2;
+
+message GetSourceCollectionRequest {
+  string url = 1;
+}
+message GetSourceCollectionResponse {
+  optional SourceCollection collection = 1;
+  repeated SourceSummary sources = 2;
+}
+
+message SourceItem {
+  string id = 1;
+  optional string collection_id = 2;
   string url = 3;
+  string title = 4;
+  string content = 5;
+  Language language = 6;
+}
+message SourceSummary {
+  string id = 1;
+  optional string collection_id = 2;
+  string url = 3;
+  string title = 4;
+}
+message SourceCollection {
+  string id = 1;
+  string url = 2;
+  string title = 3;
+  string description = 4;
+  string author = 5;
+  repeated string tags = 6;
 }
