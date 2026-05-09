@@ -42,9 +42,8 @@ message SourceItem {
 }
 message SourceSummary {
   string id = 1;
-  optional string collection_id = 2;
-  string url = 3;
-  string title = 4;
+  string url = 2;
+  string title = 3;
 }
 message SourceCollection {
   string id = 1;
