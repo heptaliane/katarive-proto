@@ -6,7 +6,7 @@ service KatariveService {
   rpc CreateNarration(CreateNarrationRequest) returns (CreateNarrationResponse);
   rpc GetJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
   rpc GetSpeakers(GetSpeakersRequest) returns (GetSpeakersResponse);
-  rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
+  rpc GetSourceCollection(GetSourceCollectionRequest) returns (GetSourceCollectionResponse);
 }
 
 message CreateNarrationRequest {
@@ -44,15 +44,24 @@ message Speaker {
   string speaker_label = 3;
 }
 
-message ListSourcesRequest {
+message GetSourceCollectionRequest {
   string url = 1;
   bool disable_cache = 2;
 }
-message ListSourcesResponse {
-  string name = 1;
-  repeated SourceInfo sources = 2;
+message GetSourceCollectionResponse {
+  optional SourceCollection collection = 1;
+  repeated SourceSummary sources = 2;
 }
-message SourceInfo {
-  string title = 1;
+message SourceSummary {
+  string id = 1;
   string url = 2;
+  string title = 3;
+}
+message SourceCollection {
+  string id = 1;
+  string url = 2;
+  string title = 3;
+  string description = 4;
+  string author = 5;
+  repeated string tags = 6;
 }
