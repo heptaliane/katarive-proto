@@ -4,7 +4,7 @@ package api.v1;
 
 service KatariveService {
   rpc QueueNarration(QueueNarrationRequest) returns (QueueNarrationResponse);
-  rpc GetNarrationResult(GetNarrationResultRequest) returns (GetNarrationResultResponse);
+  rpc GetNarration(GetNarrationRequest) returns (GetNarrationResponse);
   rpc GetNarrators(GetNarratorsRequest) returns (GetNarratorsResponse);
   rpc QueueSourceItem(QueueSourceItemRequest) returns (QueueSourceItemResponse);
   rpc GetSourceItem(GetSourceItemRequest) returns (GetSourceItemResponse);
@@ -29,10 +29,10 @@ message QueueNarrationResponse {
   string id = 1;
 }
 
-message GetNarrationResultRequest {
+message GetNarrationRequest {
   string id = 1;
 }
-message GetNarrationResultResponse {
+message GetNarrationResponse {
   JobStatus status = 1;
   optional string path = 2;
 }
