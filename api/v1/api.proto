@@ -3,54 +3,85 @@ syntax = "proto3";
 package api.v1;
 
 service KatariveService {
-  rpc CreateNarration(CreateNarrationRequest) returns (CreateNarrationResponse);
-  rpc GetJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
-  rpc GetSpeakers(GetSpeakersRequest) returns (GetSpeakersResponse);
+  rpc QueueNarration(QueueNarrationRequest) returns (QueueNarrationResponse);
+  rpc GetNarrationResult(GetNarrationResultRequest) returns (GetNarrationResultResponse);
+  rpc GetNarrators(GetNarratorsRequest) returns (GetNarratorsResponse);
+  rpc QueueSourceItem(QueueSourceItemRequest) returns (QueueSourceItemResponse);
+  rpc GetSourceItem(GetSourceItemRequest) returns (GetSourceItemResponse);
+  rpc QueueSourceCollection(QueueSourceCollectionRequest) returns (QueueSourceCollectionResponse);
   rpc GetSourceCollection(GetSourceCollectionRequest) returns (GetSourceCollectionResponse);
 }
 
-message CreateNarrationRequest {
+enum JobStatus {
+  JOB_STATUS_UNSPECIFIED = 0;
+  JOB_STATUS_PROGRESSING = 1;
+  JOB_STATUS_COMPLETED = 2;
+  JOB_STATUS_FAILED = 3;
+  JOB_STATUS_NOT_FOUND = 4;
+}
+
+message QueueNarrationRequest {
   string url = 1;
   string narrator = 2;
   int32 speaker_id = 3;
 }
-message CreateNarrationResponse {
+message QueueNarrationResponse {
   string id = 1;
 }
 
-message GetJobStatusRequest {
+message GetNarrationResultRequest {
   string id = 1;
 }
-message GetJobStatusResponse {
-  enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_PROGRESSING = 1;
-    STATUS_COMPLETED = 2;
-    STATUS_FAILED = 3;
-    STATUS_NOT_FOUND = 4;
-  }
-
-  Status status = 1;
+message GetNarrationResultResponse {
+  JobStatus status = 1;
   optional string path = 2;
 }
 
-message GetSpeakersRequest {}
-message GetSpeakersResponse {
-  repeated Speaker speakers = 1;
+message GetNarratorsRequest {}
+message GetNarratorsResponse {
+  repeated Narrator narrator = 1;
+}
+message Narrator {
+  string name = 1;
+  repeated Speaker speakers = 2;
 }
 message Speaker {
-  string narrator = 1;
-  int32 speaker_id = 2;
-  string speaker_label = 3;
+  int32 id = 1;
+  string label = 2;
 }
 
-message GetSourceCollectionRequest {
+message QueueSourceItemRequest {
   string url = 1;
   bool disable_cache = 2;
 }
+message QueueSourceItemResponse {
+  string id = 1;
+}
+
+message GetSourceItemRequest {
+  string id = 1;
+}
+message GetSourceItemResponse {
+  JobStatus status = 1;
+  optional SourceSummary metadata = 2;
+  optional string content = 3;
+}
+
+message QueueSourceCollectionRequest {
+  string url = 1;
+  bool disable_cache = 2;
+}
+message QueueSourceCollectionResponse {
+  string id = 1;
+}
+
+message GetSourceCollectionRequest {
+  string id = 1;
+}
 message GetSourceCollectionResponse {
-  optional SourceCollection collection = 1;
-  repeated SourceSummary sources = 2;
+  JobStatus status = 1;
+  optional SourceCollection collection = 2;
+  repeated SourceSummary sources = 3;
 }
 message SourceSummary {
   string id = 1;
