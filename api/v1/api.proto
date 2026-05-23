@@ -35,6 +35,7 @@ message GetNarrationRequest {
 message GetNarrationResponse {
   JobStatus status = 1;
   optional string path = 2;
+  optional SourceSummary source = 3;
 }
 
 message GetNarratorsRequest {}
