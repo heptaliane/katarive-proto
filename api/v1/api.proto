@@ -10,6 +10,7 @@ service KatariveService {
   rpc GetSourceItem(GetSourceItemRequest) returns (GetSourceItemResponse);
   rpc QueueSourceCollection(QueueSourceCollectionRequest) returns (QueueSourceCollectionResponse);
   rpc GetSourceCollection(GetSourceCollectionRequest) returns (GetSourceCollectionResponse);
+  rpc GetSourceCollections(GetSourceCollectionsRequest) returns (GetSourceCollectionsResponse);
 }
 
 enum JobStatus {
@@ -84,6 +85,12 @@ message GetSourceCollectionResponse {
   optional SourceCollection collection = 2;
   repeated SourceSummary sources = 3;
 }
+
+message GetSourceCollectionsRequest {}
+message GetSourceCollectionsResponse {
+  repeated SourceCollection collection = 1;
+}
+
 message SourceSummary {
   string id = 1;
   string url = 2;
