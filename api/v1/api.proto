@@ -3,12 +3,9 @@ syntax = "proto3";
 package api.v1;
 
 service KatariveService {
-  rpc QueueNarration(QueueNarrationRequest) returns (QueueNarrationResponse);
   rpc GetNarration(GetNarrationRequest) returns (GetNarrationResponse);
   rpc GetNarrators(GetNarratorsRequest) returns (GetNarratorsResponse);
-  rpc QueueSourceItem(QueueSourceItemRequest) returns (QueueSourceItemResponse);
   rpc GetSourceItem(GetSourceItemRequest) returns (GetSourceItemResponse);
-  rpc QueueSourceCollection(QueueSourceCollectionRequest) returns (QueueSourceCollectionResponse);
   rpc GetSourceCollection(GetSourceCollectionRequest) returns (GetSourceCollectionResponse);
   rpc GetSourceCollections(GetSourceCollectionsRequest) returns (GetSourceCollectionsResponse);
 }
@@ -21,22 +18,14 @@ enum JobStatus {
   JOB_STATUS_NOT_FOUND = 4;
 }
 
-message QueueNarrationRequest {
+message GetNarrationRequest {
   string url = 1;
   string narrator = 2;
   int32 speaker_id = 3;
 }
-message QueueNarrationResponse {
-  string id = 1;
-}
-
-message GetNarrationRequest {
-  string id = 1;
-}
 message GetNarrationResponse {
   JobStatus status = 1;
   optional string path = 2;
-  optional SourceSummary source = 3;
 }
 
 message GetNarratorsRequest {}
@@ -52,38 +41,24 @@ message Speaker {
   string label = 2;
 }
 
-message QueueSourceItemRequest {
+message GetSourceItemRequest {
   string url = 1;
   bool disable_cache = 2;
-}
-message QueueSourceItemResponse {
-  string id = 1;
-}
-
-message GetSourceItemRequest {
-  string id = 1;
 }
 message GetSourceItemResponse {
   JobStatus status = 1;
-  optional SourceSummary metadata = 2;
-  optional string content = 3;
-}
-
-message QueueSourceCollectionRequest {
-  string url = 1;
-  bool disable_cache = 2;
-}
-message QueueSourceCollectionResponse {
-  string id = 1;
+  optional SourceItem item = 2;
+  optional SourceCollection collection = 3;
 }
 
 message GetSourceCollectionRequest {
-  string id = 1;
+  string url = 1;
+  bool disable_cache = 2;
 }
 message GetSourceCollectionResponse {
   JobStatus status = 1;
   optional SourceCollection collection = 2;
-  repeated SourceSummary sources = 3;
+  repeated SourceSummary items = 3;
 }
 
 message GetSourceCollectionsRequest {}
@@ -95,6 +70,12 @@ message SourceSummary {
   string id = 1;
   string url = 2;
   string title = 3;
+}
+message SourceItem {
+  string id = 1;
+  string url = 2;
+  string title = 3;
+  string content = 4;
 }
 message SourceCollection {
   string id = 1;
