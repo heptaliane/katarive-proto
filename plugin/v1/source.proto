@@ -14,8 +14,7 @@ message GetSourceServiceMetadataRequest {}
 message GetSourceServiceMetadataResponse {
   string name = 1;
   string version = 2;
-  string supported_item_pattern = 3;
-  string supported_collection_pattern = 4;
+  string supported_pattern = 3;
 }
 
 message GetSourceItemRequest {
