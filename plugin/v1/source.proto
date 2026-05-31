@@ -34,7 +34,7 @@ message GetSourceCollectionResponse {
 
 message SourceItem {
   string id = 1;
-  optional string collection_id = 2;
+  optional string collection_url = 2;
   string url = 3;
   string title = 4;
   string content = 5;
